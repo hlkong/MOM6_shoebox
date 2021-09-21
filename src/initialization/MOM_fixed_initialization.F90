@@ -32,13 +32,6 @@ use ISOMIP_initialization, only : ISOMIP_initialize_topography
 use benchmark_initialization, only : benchmark_initialize_topography
 use Neverland_initialization, only : Neverland_initialize_topography
 use shoebox2_initialization, only : shoebox2_initialize_topography
-use shoebox3_initialization, only : shoebox3_initialize_topography
-use shoebox4_initialization, only : shoebox4_initialize_topography
-use channel1_initialization, only : channel1_initialize_topography
-use channel2_initialization, only : channel2_initialize_topography
-use channel6_initialization, only : channel6_initialize_topography
-use channel7_initialization, only : channel7_initialize_topography
-use channel9_initialization, only : channel9_initialize_topography
 use DOME2d_initialization, only : DOME2d_initialize_topography
 use Kelvin_initialization, only : Kelvin_initialize_topography
 use sloshing_initialization, only : sloshing_initialize_topography
@@ -202,13 +195,6 @@ subroutine MOM_initialize_topography(D, max_depth, G, PF)
                  " \t benchmark - use the benchmark test case topography. \n"//&
                  " \t Neverland - use the Neverland test case topography. \n"//&
                  " \t shoebox2 - use the shoebox2 test case topography. \n"//&
-                 " \t shoebox3 - use the shoebox3 test case topography. \n"//&
-                 " \t shoebox4 - use the shoebox4 test case topography. \n"//&
-                 " \t channel1 - use the channel1 test case topography. \n"//&
-                 " \t channel2 - use the channel2 test case topography. \n"//&
-                 " \t channel6 - use the channel6 test case topography. \n"//&
-                 " \t channel7 - use the channel7 test case topography. \n"//&
-                 " \t channel9 - use the channel9 test case topography. \n"//&
                  " \t DOME - use a slope and channel configuration for the \n"//&
                  " \t\t DOME sill-overflow test case. \n"//&
                  " \t ISOMIP - use a slope and channel configuration for the \n"//&
@@ -235,13 +221,6 @@ subroutine MOM_initialize_topography(D, max_depth, G, PF)
     case ("benchmark"); call benchmark_initialize_topography(D, G, PF, max_depth)
     case ("Neverland"); call Neverland_initialize_topography(D, G, PF, max_depth)
     case ("shoebox2");  call shoebox2_initialize_topography(D, G, PF, max_depth)
-    case ("shoebox3");  call shoebox3_initialize_topography(D, G, PF, max_depth)
-    case ("shoebox4");  call shoebox4_initialize_topography(D, G, PF, max_depth)
-    case ("channel1");  call channel1_initialize_topography(D, G, PF, max_depth)
-    case ("channel2");  call channel2_initialize_topography(D, G, PF, max_depth)
-    case ("channel6");  call channel6_initialize_topography(D, G, PF, max_depth)
-    case ("channel7");  call channel7_initialize_topography(D, G, PF, max_depth)
-    case ("channel9");  call channel9_initialize_topography(D, G, PF, max_depth)
     case ("DOME2D");    call DOME2d_initialize_topography(D, G, PF, max_depth)
     case ("Kelvin");    call Kelvin_initialize_topography(D, G, PF, max_depth)
     case ("sloshing");  call sloshing_initialize_topography(D, G, PF, max_depth)

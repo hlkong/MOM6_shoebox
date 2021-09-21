@@ -40,14 +40,8 @@ use MESO_surface_forcing,    only : MESO_buoyancy_forcing
 use MESO_surface_forcing,    only : MESO_surface_forcing_init, MESO_surface_forcing_CS
 use Neverland_surface_forcing, only : Neverland_wind_forcing, Neverland_buoyancy_forcing
 use Neverland_surface_forcing, only : Neverland_surface_forcing_init, Neverland_surface_forcing_CS
-use shoebox8_surface_forcing, only : shoebox8_buoyancy_forcing,shoebox8_wind_forcing
-use shoebox8_surface_forcing, only : shoebox8_surface_forcing_init, shoebox8_surface_forcing_CS
 use shoebox9_surface_forcing, only : shoebox9_buoyancy_forcing, shoebox9_wind_forcing
 use shoebox9_surface_forcing, only : shoebox9_surface_forcing_init, shoebox9_surface_forcing_CS
-use shoebox7_surface_forcing, only : shoebox7_buoyancy_forcing, shoebox7_wind_forcing
-use shoebox7_surface_forcing, only : shoebox7_surface_forcing_init, shoebox7_surface_forcing_CS
-use channel4_surface_forcing, only : channel4_wind_forcing, channel4_buoyancy_forcing
-use channel4_surface_forcing, only : channel4_surface_forcing_init, channel4_surface_forcing_CS
 use user_surface_forcing,    only : USER_wind_forcing, USER_buoyancy_forcing
 use user_surface_forcing,    only : USER_surface_forcing_init, user_surface_forcing_CS
 use user_revise_forcing,     only : user_alter_forcing, user_revise_forcing_init
@@ -207,10 +201,7 @@ type, public :: surface_forcing_CS ; private
   type(dumbbell_surface_forcing_CS), pointer :: dumbbell_forcing_CSp => NULL()
   type(MESO_surface_forcing_CS), pointer :: MESO_forcing_CSp => NULL()
   type(Neverland_surface_forcing_CS), pointer :: Neverland_forcing_CSp => NULL()
-  type(shoebox8_surface_forcing_CS), pointer :: shoebox8_forcing_CSp => NULL()
   type(shoebox9_surface_forcing_CS), pointer :: shoebox9_forcing_CSp => NULL()
-  type(shoebox7_surface_forcing_CS), pointer :: shoebox7_forcing_CSp => NULL()
-  type(channel4_surface_forcing_CS), pointer :: channel4_forcing_CSp => NULL()
   type(SCM_idealized_hurricane_CS), pointer :: SCM_idealized_hurricane_CSp => NULL()
   type(SCM_CVmix_tests_CS),      pointer :: SCM_CVmix_tests_CSp => NULL()
   !!@}
@@ -287,14 +278,8 @@ subroutine set_forcing(sfc_state, forces, fluxes, day_start, day_interval, G, CS
       call wind_forcing_const(sfc_state, forces, CS%tau_x0, CS%tau_y0, day_center, G, CS)
     elseif (trim(CS%wind_config) == "Neverland") then
       call Neverland_wind_forcing(sfc_state, forces, day_center, G, CS%Neverland_forcing_CSp)
-    elseif (trim(CS%wind_config) == "shoebox8") then
-      call shoebox8_wind_forcing(sfc_state, forces, day_center, G, CS%shoebox8_forcing_CSp)
     elseif (trim(CS%wind_config) == "shoebox9") then
       call shoebox9_wind_forcing(sfc_state, forces, day_center, G, CS%shoebox9_forcing_CSp)
-    elseif (trim(CS%wind_config) == "shoebox7") then
-      call shoebox7_wind_forcing(sfc_state, forces, day_center, G, CS%shoebox7_forcing_CSp)
-    elseif (trim(CS%wind_config) == "channel4") then
-      call channel4_wind_forcing(sfc_state, forces, day_center, G, CS%channel4_forcing_CSp)
     elseif (trim(CS%wind_config) == "SCM_ideal_hurr") then
       call SCM_idealized_hurricane_wind_forcing(sfc_state, forces, day_center, G, CS%SCM_idealized_hurricane_CSp)
     elseif (trim(CS%wind_config) == "SCM_CVmix_tests") then
@@ -327,14 +312,8 @@ subroutine set_forcing(sfc_state, forces, fluxes, day_start, day_interval, G, CS
       call MESO_buoyancy_forcing(sfc_state, fluxes, day_center, dt, G, CS%MESO_forcing_CSp)
     elseif (trim(CS%buoy_config) == "Neverland") then
       call Neverland_buoyancy_forcing(sfc_state, fluxes, day_center, dt, G, CS%Neverland_forcing_CSp)
-    elseif (trim(CS%buoy_config) == "shoebox8") then
-      call shoebox8_buoyancy_forcing(sfc_state, fluxes, day_center, dt, G, CS%shoebox8_forcing_CSp)
     elseif (trim(CS%buoy_config) == "shoebox9") then
       call shoebox9_buoyancy_forcing(sfc_state, fluxes, day_center, dt, G, CS%shoebox9_forcing_CSp)
-    elseif (trim(CS%buoy_config) == "shoebox7") then
-      call shoebox7_buoyancy_forcing(sfc_state, fluxes, day_center, dt, G, CS%shoebox7_forcing_CSp)    
-    elseif (trim(CS%buoy_config) == "channel4") then
-      call channel4_buoyancy_forcing(sfc_state, fluxes, day_center, dt, G, CS%channel4_forcing_CSp)
     elseif (trim(CS%buoy_config) == "SCM_CVmix_tests") then
       call SCM_CVmix_tests_buoyancy_forcing(sfc_state, fluxes, day_center, G, CS%SCM_CVmix_tests_CSp)
     elseif (trim(CS%buoy_config) == "USER") then
@@ -1713,14 +1692,8 @@ subroutine surface_forcing_init(Time, G, param_file, diag, CS, tracer_flow_CSp)
     call MESO_surface_forcing_init(Time, G, param_file, diag, CS%MESO_forcing_CSp)
   elseif (trim(CS%wind_config) == "Neverland") then
     call Neverland_surface_forcing_init(Time, G, param_file, diag, CS%Neverland_forcing_CSp)
-  elseif (trim(CS%wind_config) == "shoebox8") then
-    call shoebox8_surface_forcing_init(Time, G, param_file, diag, CS%shoebox8_forcing_CSp)
   elseif (trim(CS%wind_config) == "shoebox9") then
     call shoebox9_surface_forcing_init(Time, G, param_file, diag, CS%shoebox9_forcing_CSp)
-  elseif (trim(CS%wind_config) == "shoebox7") then
-    call shoebox7_surface_forcing_init(Time, G, param_file, diag, CS%shoebox7_forcing_CSp)
-  elseif (trim(CS%wind_config) == "channel4") then
-    call channel4_surface_forcing_init(Time, G, param_file, diag, CS%channel4_forcing_CSp)
   elseif (trim(CS%wind_config) == "SCM_ideal_hurr") then
     call SCM_idealized_hurricane_wind_init(Time, G, param_file, CS%SCM_idealized_hurricane_CSp)
   elseif (trim(CS%wind_config) == "const") then
