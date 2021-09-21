@@ -14,7 +14,7 @@ that has been submitted to Journal of Physical Oceanography. Some modules are be
 
 Start at the [MOM6-examples wiki](https://github.com/NOAA-GFDL/MOM6-examples/wiki) which has installation instructions.
 
-For the specific installation instructions that are suitable to [Midway](https://rcc.uchicago.edu/docs/using-midway/index.html) super computing center at the University of Chicago, refer to [hlkong/MOM6-FMS-SIS2/wiki](https://github.com/hlkong/MOM6-FMS-SIS2/wiki). 
+For more specific installation instructions that are suitable to [Midway](https://rcc.uchicago.edu/docs/using-midway/index.html) super computing center at the University of Chicago, refer to [hlkong/MOM6-FMS-SIS2/wiki](https://github.com/hlkong/MOM6-FMS-SIS2/wiki). 
 
 [Source code documentation](http://mom6.readthedocs.io/) is hosted on read the docs.
 
